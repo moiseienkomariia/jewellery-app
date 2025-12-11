@@ -1,4 +1,3 @@
-
 const MainRoutes = () => (
         <div>
             <nav>
@@ -9,7 +8,6 @@ const MainRoutes = () => (
                     <li><a href={`/products/silver`}>Silver</a></li>
                 </ul>
             </nav>
-
         </div>
     );
 

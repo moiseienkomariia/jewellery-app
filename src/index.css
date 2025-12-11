@@ -1,0 +1,11 @@
+:root {
+    --font-family: Merriweather;
+    --main-text-color: #9B97B6;
+    --main-title-color: #6A515E;
+    --secondary-title-color: #A06784;
+    --card-bg-color: #fff;
+    --main-gradient-bg: linear-gradient(96.53deg, #FFAE88 -3.19%, #8F93EA 105.27%),
+                        linear-gradient(238.59deg, #5FD3FF -18.96%, rgba(99, 214, 255, 0) 54.42%);
+    --secondary-gradient-bg: linear-gradient(96.53deg, #FFAE88 -3.19%, #8F93EA 105.27%),
+                        linear-gradient(238.59deg, #5FD3FF -18.96%, rgba(99, 214, 255, 0) 54.42%);
+}
