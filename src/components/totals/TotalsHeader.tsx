@@ -1,14 +1,12 @@
-import React from 'react';
+import React from "react";
 
+// TODO children
 interface TotalsHeaderProps {
-    title: string;
+  title: string;
 }
 
-const TotalsHeader: React.FC<TotalsHeaderProps> = ({title}) => {
-
-    return (
-        <div>{title}</div>
-    );
+const TotalsHeader: React.FC<TotalsHeaderProps> = ({ title }) => {
+  return <div>{title}</div>;
 };
 
 export default TotalsHeader;

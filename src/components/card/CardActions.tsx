@@ -1,12 +1,10 @@
-import React, { type ReactNode } from 'react';
+import React, { type ReactNode } from "react";
 
-type WithChildrenProps = { children?: ReactNode }
+// TODO gotowy interface z React PropsWithChildren
+type WithChildrenProps = { children?: ReactNode };
 
-const CardDescription: React.FC<WithChildrenProps> = ({children}) => {
-
-    return (
-        <>{children}</>
-    );
+const CardDescription: React.FC<WithChildrenProps> = ({ children }) => {
+  return <>{children}</>;
 };
 
 export default CardDescription;

@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { type PropsWithChildren } from "react";
 import Icon from "../icon/Icon";
 
 interface ChipProps {
-    label: string;
-    icon: string;
+  icon: string;
 }
 
-const Chip: React.FC<ChipProps> = ({icon, label}) => {
-    return (
-        <div>
-            <Icon icon={icon} />
-            {label}
-        </div>
-    );
+const Chip: React.FC<ChipProps> = ({
+  icon,
+  children,
+}: PropsWithChildren<ChipProps>) => {
+  return (
+    <div className={"chip"}>
+      <Icon icon={icon} />
+      {children}
+    </div>
+  );
 };
 
 export default Chip;

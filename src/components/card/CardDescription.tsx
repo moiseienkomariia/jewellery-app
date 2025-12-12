@@ -1,14 +1,12 @@
-import React from 'react';
+import React from "react";
 
+// TODO powinien uzywac children
 interface CardDescriptionProps {
-    description: string;
+  description: string;
 }
 
-const CardDescription: React.FC<CardDescriptionProps> = ({description}) => {
-
-    return (
-        <div>{description}</div>
-    );
+const CardDescription: React.FC<CardDescriptionProps> = ({ description }) => {
+  return <div>{description}</div>;
 };
 
 export default CardDescription;
