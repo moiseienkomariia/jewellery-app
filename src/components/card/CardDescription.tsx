@@ -1,12 +1,7 @@
-import React from "react";
+import React, { type PropsWithChildren } from "react";
 
-// TODO powinien uzywac children
-interface CardDescriptionProps {
-  description: string;
-}
-
-const CardDescription: React.FC<CardDescriptionProps> = ({ description }) => {
-  return <div>{description}</div>;
+const CardDescription: React.FC<PropsWithChildren> = ({ children }) => {
+  return <>{children}</>;
 };
 
 export default CardDescription;

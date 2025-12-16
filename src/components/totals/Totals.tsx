@@ -1,33 +1,27 @@
-import React from "react";
 import TotalsHeader from "./TotalsHeader";
 import TotalsSummary from "./TotalsSummary";
 import TotalsItem, { type TotalsItemPropsInterface } from "./TotalsItem";
+import SummaryLabel from "./SummaryLabel";
+import SummaryValue from "./SummaryValue";
 
 // TODO zastosuj kompozycję
 interface TotalsProps {
   title: string;
   items: TotalsItemPropsInterface[];
-  summaryLabel: string;
-  summaryValue: string;
 }
 
-const Totals: React.FC<TotalsProps> = ({
-  title,
+const Totals = ({
   items,
-  summaryLabel,
-  summaryValue,
-}) => {
-  console.log(items);
+}: TotalsProps) => {
   return (
     <div>
-      <TotalsHeader title={title} />
+      <TotalsHeader>Header</TotalsHeader>
 
       {items &&
         items.map((item) => (
-          <TotalsItem label={item.label} value={item.value} />
+          <TotalsItem label={item.label} value={item.value} currency={item.currency} />
         ))}
-      {/* <TotalsItem label={item.label} value={item.value} /> */}
-      <TotalsSummary label={summaryLabel} value={summaryValue} />
+      <TotalsSummary label={<SummaryLabel />} value={<SummaryValue />} />
     </div>
   );
 };

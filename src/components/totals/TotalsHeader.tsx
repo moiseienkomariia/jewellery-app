@@ -1,12 +1,7 @@
-import React from "react";
+import React, { type PropsWithChildren } from "react";
 
-// TODO children
-interface TotalsHeaderProps {
-  title: string;
-}
-
-const TotalsHeader: React.FC<TotalsHeaderProps> = ({ title }) => {
-  return <div>{title}</div>;
+const TotalsHeader: React.FC<PropsWithChildren> = ({ children }) => {
+  return <>{children}</>;
 };
 
 export default TotalsHeader;

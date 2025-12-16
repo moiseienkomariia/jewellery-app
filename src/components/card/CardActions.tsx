@@ -1,9 +1,6 @@
-import React, { type ReactNode } from "react";
+import React, { type PropsWithChildren } from "react";
 
-// TODO gotowy interface z React PropsWithChildren
-type WithChildrenProps = { children?: ReactNode };
-
-const CardDescription: React.FC<WithChildrenProps> = ({ children }) => {
+const CardDescription: React.FC<PropsWithChildren> = ({ children }) => {
   return <>{children}</>;
 };
 

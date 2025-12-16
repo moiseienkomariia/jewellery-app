@@ -1,11 +1,11 @@
 import React, { type PropsWithChildren } from "react";
 import Icon from "../icon/Icon";
 
-interface ChipProps {
+export interface ChipProps {
   icon: string;
 }
 
-const Chip: React.FC<ChipProps> = ({
+export const Chip: React.FC<ChipProps> = ({
   icon,
   children,
 }: PropsWithChildren<ChipProps>) => {
@@ -17,4 +17,3 @@ const Chip: React.FC<ChipProps> = ({
   );
 };
 
-export default Chip;

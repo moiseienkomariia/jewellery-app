@@ -19,8 +19,6 @@ export const Elevation = ({
         return child;
       }
 
-      console.log(child);
-
       return cloneElement(child, {
         // @ts-expect-error this is just temporary
         className: `elevation ${child.props?.className || ""}`,
