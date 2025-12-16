@@ -1,0 +1,152 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Rings",
+      "slug": "rings"
+    },
+    {
+      "id": 2,
+      "name": "Necklaces",
+      "slug": "necklaces"
+    },
+    {
+      "id": 3,
+      "name": "Earrings",
+      "slug": "earrings"
+    },
+    {
+      "id": 4,
+      "name": "Bracelets",
+      "slug": "bracelets"
+    }
+  ],
+
+  "products": [
+    {
+      "id": 1,
+      "name": "Pink Diamond Ring",
+      "categoryId": 1,
+      "price": 500,
+      "currency": "USD",
+      "discountPercent": 20,
+      "rating": 4.8,
+      "reviewsCount": 124,
+      "material": "925 Sterling Silver",
+      "stone": "Round Cut Cubic Zircon",
+      "weight": "0.4 ct",
+      "description": "Round cut cubic zircon stones set in sterling silver with rhodium plating. Perfect for special occasions.",
+      "images": [
+        "/images/products/pink-diamond-1.png",
+        "/images/products/pink-diamond-2.png"
+      ],
+      "isFeatured": true,
+      "inStock": true
+    },
+    {
+      "id": 2,
+      "name": "Blue Crystal Ring",
+      "categoryId": 1,
+      "price": 420,
+      "currency": "USD",
+      "discountPercent": 0,
+      "rating": 4.5,
+      "reviewsCount": 89,
+      "material": "White Gold",
+      "stone": "Blue Crystal",
+      "weight": "0.35 ct",
+      "description": "Elegant blue crystal ring crafted with precision and premium materials.",
+      "images": ["/images/products/blue-ring-1.png"],
+      "isFeatured": false,
+      "inStock": true
+    },
+    {
+      "id": 3,
+      "name": "Diamond Necklace",
+      "categoryId": 2,
+      "price": 780,
+      "currency": "USD",
+      "discountPercent": 10,
+      "rating": 4.9,
+      "reviewsCount": 201,
+      "material": "18K Gold",
+      "stone": "Diamond",
+      "weight": "0.6 ct",
+      "description": "Minimalist diamond necklace designed for everyday elegance.",
+      "images": ["/images/products/diamond-necklace-1.png"],
+      "isFeatured": true,
+      "inStock": true
+    },
+    {
+      "id": 4,
+      "name": "Rose Gold Earrings",
+      "categoryId": 3,
+      "price": 260,
+      "currency": "USD",
+      "discountPercent": 0,
+      "rating": 4.3,
+      "reviewsCount": 56,
+      "material": "Rose Gold",
+      "stone": "Zircon",
+      "weight": "0.25 ct",
+      "description": "Lightweight rose gold earrings with subtle zircon sparkle.",
+      "images": ["/images/products/rose-earrings-1.png"],
+      "isFeatured": false,
+      "inStock": true
+    }
+  ],
+
+  "carts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "items": [
+        {
+          "productId": 1,
+          "quantity": 1,
+          "price": 500
+        },
+        {
+          "productId": 2,
+          "quantity": 1,
+          "price": 420
+        }
+      ],
+      "subtotal": 920,
+      "deliveryFee": 50,
+      "total": 970,
+      "updatedAt": "2025-01-12T10:30:00Z"
+    }
+  ],
+
+  "orders": [
+    {
+      "id": 1,
+      "userId": 1,
+      "items": [
+        {
+          "productId": 1,
+          "name": "Pink Diamond Ring",
+          "quantity": 2,
+          "price": 500
+        }
+      ],
+      "deliveryAddress": {
+        "fullName": "Robert Fox",
+        "street": "Imran Road",
+        "city": "Lahore",
+        "country": "Pakistan",
+        "postalCode": "54000"
+      },
+      "payment": {
+        "method": "Visa",
+        "last4": "3947"
+      },
+      "subtotal": 1000,
+      "deliveryFee": 50,
+      "total": 1050,
+      "status": "paid",
+      "createdAt": "2025-01-11T18:15:00Z"
+    }
+  ]
+}
