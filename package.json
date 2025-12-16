@@ -9,8 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "server": "json-server --watch ./data/api.json"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.0",
@@ -37,7 +36,6 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "eslint-plugin-storybook": "^10.1.3",
     "globals": "^16.5.0",
-    "json-server": "^1.0.0-beta.3",
     "playwright": "^1.57.0",
     "sass": "^1.94.2",
     "storybook": "^10.1.3",
