@@ -2,13 +2,28 @@
 
 Celem jest dodanie warstwy komunikacji z mock REST API (json-server) za pomocą RTK Query. W ramach zadania trzeba przygotować dwa query endpointy:
 
-1. categories query
+1. Dodaj uzywanie zmiennych środowiskowych i endpoint do api dodaj po przez SERVER_URL
+2. Dodaj obiekt apiEndpoints, który będzie trzymał wszystkie endpointy np:
+
+```ts
+const apiEndpoints = {
+    categories: '/categories/'
+    products: '/products/'
+    getProduct: (id: string) => `/products/${id}`
+    // itd...
+}
+```
+
+3. categories query
 
 Ma pobierać listę kategorii z endpointu: GET /categories
 
 Wynikiem ma być tablica kategorii (lista do filtrowania produktów w UI)
 
-2. products query
+Dodaj komponent `CategoriesList` w folderze `src/containers`.
+Który będzie wywoływał hooka z query do categories. Kiedy dane się pobiora powinien wyświetlić je jako Chip(tak jak na figmie).
+
+4. products query
 
 Ma pobierać listę produktów z endpointu: GET /products
 
@@ -16,9 +31,11 @@ Powinno wspierać co najmniej:
 
 pobranie wszystkich produktów
 
-filtrowanie po kategorii (np. GET /products?categoryId=1)
+Na ten moment pomiń wyświetlanie tych danych. Zrób tylko komponent `src/containers/ProductsListing` który pobierze te dane.
 
-(Opcjonalnie, jeśli przydatne w UI) wyszukiwanie: GET /products?q=ring oraz sortowanie: GET /products?\_sort=price&\_order=asc
+Tutaj dokumentacja json-server: https://github.com/typicode/json-server/tree/v0
+
+Url z filtrowaniem jako przykład: /products?rating=2
 
 Typy danych:
 
