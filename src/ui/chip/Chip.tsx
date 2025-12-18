@@ -1,11 +1,11 @@
-import React, { type PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import Icon from "../icon/Icon";
 
 interface ChipProps {
   icon: string;
 }
 
-const Chip: React.FC<ChipProps> = ({
+const Chip = ({
   icon,
   children,
 }: PropsWithChildren<ChipProps>) => {

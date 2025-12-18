@@ -1,14 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import Chip from "./Chip";
+import { CategoriesList } from "./CategoriesList";
 
 const meta = {
-    component: Chip,
-} satisfies Meta<typeof Chip>;
+    component: CategoriesList,
+} satisfies Meta<typeof CategoriesList>
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
 export const Default: Story = {
-    args:{
-        icon: 'icon',
-    },
-};
+    args: {
+        icon: 'icon'
+    }
+}

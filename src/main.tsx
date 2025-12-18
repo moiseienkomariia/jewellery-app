@@ -5,6 +5,7 @@ import MainRoutes from "./routes/MainRoutes";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
+import { CategoriesList } from "./containers/CategoriesList/CategoriesList";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ createRoot(document.getElementById("root") as HTMLElement).render(
   <StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
+      <CategoriesList />
     </Provider>
   </StrictMode>
 );
