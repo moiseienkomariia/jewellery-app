@@ -1,8 +1,8 @@
-import { useGetCategoriesListQuery } from "../../../data/api.ts";
+import { api } from "../../api.ts";
 import { Chip } from "../../ui/chip/Chip.tsx";
 
 export const CategoriesList = () => {
-  const { data, isLoading } = useGetCategoriesListQuery();
+  const { data, isLoading } = api.useGetCategoriesListQuery();
   if (isLoading) return <div>Is Loading...</div>;
   console.log({ data });
 
