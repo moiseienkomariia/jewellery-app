@@ -5,7 +5,7 @@ export interface ChipProps {
   icon: string;
 }
 
-const Chip = ({ icon, children }: PropsWithChildren<ChipProps>) => {
+export const Chip = ({ icon, children }: PropsWithChildren<ChipProps>) => {
   return (
     <div className={"chip"}>
       <Icon icon={icon} />

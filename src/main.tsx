@@ -1,29 +1,11 @@
 import { StrictMode } from "react";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MainRoutes from "./routes/MainRoutes";
 import { createRoot } from "react-dom/client";
-import { Provider } from "react-redux";
-import { store } from "./app/store";
-import { CategoriesList } from "./containers/CategoriesList/CategoriesList";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <MainRoutes />,
-  },
-  {
-    path: "/product/:id",
-    element: <div>Product</div>,
-  },
-]);
+import { App } from "./App";
 
 createRoot(document.getElementById("root") as HTMLElement).render(
   <StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-      <CategoriesList />
-    </Provider>
+    <App />
   </StrictMode>
 );
 
