@@ -12,10 +12,8 @@ export const Default: Story = {
     args: {
         title: 'Payment',
         items: [
-            {label: "Item total", value: "$1000"},
-            {label: "Delivery fee", value: "$50"}
+            {label: "Item total", value: "1000", currency: "$"},
+            {label: "Delivery fee", value: "50", currency: "$"}
         ],
-        summaryLabel: "Total",
-        summaryValue: "1050",
     }
 }

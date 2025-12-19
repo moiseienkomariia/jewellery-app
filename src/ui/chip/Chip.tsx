@@ -1,14 +1,11 @@
 import { type PropsWithChildren } from "react";
 import Icon from "../icon/Icon";
 
-interface ChipProps {
+export interface ChipProps {
   icon: string;
 }
 
-const Chip = ({
-  icon,
-  children,
-}: PropsWithChildren<ChipProps>) => {
+const Chip = ({ icon, children }: PropsWithChildren<ChipProps>) => {
   return (
     <div className={"chip"}>
       <Icon icon={icon} />
@@ -16,5 +13,3 @@ const Chip = ({
     </div>
   );
 };
-
-export default Chip;

@@ -1,6 +1,7 @@
-import React from "react";
+import { type PropsWithChildren } from "react";
 import Icon from "../icon/Icon";
 import style from "./Button.module.scss";
+import { css } from "../../helpers/css";
 
 interface ButtonProps {
   label?: string;
@@ -10,26 +11,22 @@ interface ButtonProps {
   icon?: string;
   iconOnly?: boolean;
 }
-// TODO przenieś do src/helpers
-const css = (...classNames: (string | undefined | false)[]) =>
-  classNames.filter(Boolean).join(" ");
 
-// TODO uzywaj props.children zamiast label
-const Button: React.FC<ButtonProps> = ({
-  label,
+const Button = ({
   size,
   type,
   onClick,
   icon,
   iconOnly,
-}) => {
+  children
+}: PropsWithChildren<ButtonProps>) => {
   const styleSize = size && style[size];
   const styleType = type && style[type];
 
   return (
     <button onClick={onClick} className={css(styleSize, styleType)}>
       {icon && <Icon icon={icon} />}
-      {!iconOnly && label}
+      {!iconOnly && children}
     </button>
   );
 };

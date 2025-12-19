@@ -4,13 +4,14 @@ import React from "react";
 export interface TotalsItemPropsInterface {
   label: string;
   value: string;
+  currency: string;
 }
 
-const TotalsItem: React.FC<TotalsItemPropsInterface> = ({ label, value }) => {
+const TotalsItem: React.FC<TotalsItemPropsInterface> = ({ label, value, currency }) => {
   return (
     <div>
       <div>{label}</div>
-      <div>{value}</div>
+      <div>{value} {currency}</div>
     </div>
   );
 };

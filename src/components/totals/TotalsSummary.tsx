@@ -6,11 +6,11 @@ interface TotalsSummaryProps {
   value: JSX.Element;
 }
 
-const TotalsSummary: React.FC<TotalsSummaryProps> = ({ label, value }) => {
+const TotalsSummary: React.FC<TotalsSummaryProps> = ({label, value}) => {
   return (
-    <div>
-      <div>{label}</div>
-      <div>{value}</div>
+    <div className={style.totalsSummary}>
+      {label}
+      {value}
     </div>
   );
 };

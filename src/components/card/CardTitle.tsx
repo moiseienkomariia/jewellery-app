@@ -1,12 +1,7 @@
-import React from "react";
+import React, { type PropsWithChildren } from "react";
 
-// TODO uzyj propa children
-interface CardTitleProps {
-  title: string;
-}
-
-const CardTitle: React.FC<CardTitleProps> = ({ title }) => {
-  return <div>{title}</div>;
+const CardTitle: React.FC<PropsWithChildren> = ({ children }) => {
+  return <div>{children}</div>;
 };
 
 export default CardTitle;

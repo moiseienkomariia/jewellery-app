@@ -1,15 +1,14 @@
 import React from "react";
 
-// TODO zamiast label uzyj nazwy "alt"
 interface CardImageProps {
   src: string;
-  label?: string;
+  alt?: string;
 }
 
-const CardImage: React.FC<CardImageProps> = ({ src, label }) => {
+const CardImage: React.FC<CardImageProps> = ({ src, alt }) => {
   return (
     <div>
-      <img src={src} alt={label ? label : ""} />
+      <img src={src} alt={alt ? alt : ""} />
     </div>
   );
 };
