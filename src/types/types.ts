@@ -1,7 +1,7 @@
-export type Category = {
-  id: number;
-  name: string;
-  slug: string;
+export interface Category {
+  id: number,
+  name: string,
+  slug: string,
 };
 
 export type Product = {
@@ -33,3 +33,13 @@ export type Product = {
   isFeatured: boolean;
   inStock: boolean;
 };
+
+export type CartItem = {
+  productId: number;
+  quantity: number;
+}
+
+export interface Cart {
+  cartId: number,
+  items: CartItem[],
+}

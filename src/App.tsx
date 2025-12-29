@@ -3,6 +3,8 @@ import { Provider } from "react-redux";
 import { store } from "./app/store";
 import MainRoutes from "./routes/MainRoutes";
 import { CategoriesList } from "./containers/CategoriesList/CategoriesList";
+import { ProductsList } from "./containers/ProductsList/ProductsList";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +22,7 @@ export const App = () => {
       <strong>hello world</strong>
       <RouterProvider router={router} />
       <CategoriesList />
+      <ProductsList />
     </Provider>
   );
 };

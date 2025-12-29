@@ -1,6 +1,10 @@
-const SummaryLabel = () => {
+interface SummaryLabelProps {
+    label: string;
+}
+
+const SummaryLabel = ({label}: SummaryLabelProps) => {
     return (
-        <div>Label Text</div>
+        <div>{label}</div>
     )
 }
 

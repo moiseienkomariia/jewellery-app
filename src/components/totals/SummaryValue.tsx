@@ -1,6 +1,11 @@
-const SummaryValue = () => {
+interface SummaryValueProps {
+    value: string;
+    currency?: string;
+}
+
+const SummaryValue = ({value, currency}: SummaryValueProps) => {
     return (
-        <div>Value</div>
+        <div>{value} {currency}</div>
     )
 }
 

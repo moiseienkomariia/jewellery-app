@@ -1,16 +1,11 @@
-import React, { type JSX } from "react";
+import React, { type PropsWithChildren } from "react";
+import style from "./Totals.module.scss";
 
-// TODO przerób na JSX.Element zamiast string. Pamiętaj o klasach cssowych.
-interface TotalsSummaryProps {
-  label: JSX.Element;
-  value: JSX.Element;
-}
 
-const TotalsSummary: React.FC<TotalsSummaryProps> = ({label, value}) => {
+const TotalsSummary: React.FC<PropsWithChildren> = ({children}) => {
   return (
     <div className={style.totalsSummary}>
-      {label}
-      {value}
+      {children}
     </div>
   );
 };

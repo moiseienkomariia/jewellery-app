@@ -1,7 +1,8 @@
-import { useGetProductsListQuery } from "../../api.ts";
+import { api } from "../../api.ts";
 
 export const ProductsList = () => {
-  const { data, isLoading } = useGetProductsListQuery();
+  const { data, isLoading, isError } = api.useGetProductsListQuery();
+  if (isError) return <div>Products Error</div>
   if (isLoading) return <div>Is Loading...</div>;
   console.log({ data });
 
@@ -9,7 +10,7 @@ export const ProductsList = () => {
     <>
       {data &&
         data.map((product) => {
-          <div>{product.name}</div>;
+          return <div key={product.id}>{product.name}</div>;
         })}
     </>
   );
