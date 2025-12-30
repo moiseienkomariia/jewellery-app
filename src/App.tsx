@@ -1,9 +1,9 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./app/store";
+import { store } from "@store/store";
 import MainRoutes from "./routes/MainRoutes";
-import { CategoriesList } from "./containers/CategoriesList/CategoriesList";
-import { ProductsList } from "./containers/ProductsList/ProductsList";
+import { CategoriesList } from "@containers";
+import { ProductsList } from "@containers";
 
 const router = createBrowserRouter([
   {

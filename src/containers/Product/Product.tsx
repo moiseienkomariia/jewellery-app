@@ -1,22 +1,21 @@
-import { api } from "../../api.ts";
+import { api } from "../../store/api.ts";
 
 interface ProductProps {
-    productId: number,
+  productId: number;
 }
 
-export const Product = ({productId}: ProductProps) => {
+export const Product = ({ productId }: ProductProps) => {
   const { data, isLoading, isError } = api.useGetProductQuery(productId);
-  if (isError) return <div>Products Error</div>
+  if (isError) return <div>Products Error</div>;
   if (isLoading) return <div>Is Loading...</div>;
   console.log({ data });
 
-  if (!data) return null
+  if (!data) return null;
 
   return (
     <>
-        <div>{data.name}</div>
-        <div>{data.price}</div>
+      <div>{data.name}</div>
+      <div>{data.price}</div>
     </>
-    
-  )
-}
+  );
+};

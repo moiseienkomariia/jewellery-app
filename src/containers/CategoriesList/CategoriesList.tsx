@@ -1,13 +1,13 @@
-import { api } from "../../api.ts";
-import { Chip } from "../../ui/chip/Chip.tsx";
+import { Chip } from "@ui";
+import { api } from "../../store/api.ts";
 
 export const CategoriesList = () => {
   const { data, isLoading, isError } = api.useGetCategoriesListQuery();
-  
-  if (isError) return <div>Error</div>
+
+  if (isError) return <div>Error</div>;
   if (isLoading) return <div>Is Loading...</div>;
   console.log({ data });
-  
+
   return (
     <>
       {data &&

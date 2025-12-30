@@ -1,8 +1,8 @@
-import { api } from "../../api.ts";
+import { api } from "../../store/api.ts";
 
 export const ProductsList = () => {
   const { data, isLoading, isError } = api.useGetProductsListQuery();
-  if (isError) return <div>Products Error</div>
+  if (isError) return <div>Products Error</div>;
   if (isLoading) return <div>Is Loading...</div>;
   console.log({ data });
 

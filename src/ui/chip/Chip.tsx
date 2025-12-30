@@ -1,5 +1,5 @@
 import { type PropsWithChildren } from "react";
-import Icon from "../icon/Icon";
+import Icon from "../Icon/Icon";
 
 export interface ChipProps {
   icon: string;

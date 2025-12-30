@@ -1,13 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { apiEndpoints } from "./config/apiEndpoints";
-import type { Cart, Category, Product } from "./types/types";
-import { API_URL } from "./config/constants";
+import { apiEndpoints } from "@config/apiEndpoints";
+import type { Cart, Category, Product } from "@types";
+import { API_URL } from "@config/constants";
 
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
-  // baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000' }),
-  tagTypes: ['Cart'],
+  tagTypes: ["Cart"],
 
   endpoints: (build) => ({
     getCategoriesList: build.query<Category[], void>({
@@ -23,38 +22,38 @@ export const api = createApi({
       query: () => {
         return {
           url: apiEndpoints.cart,
-          method: 'POST',
+          method: "POST",
           body: {
             items: [],
           },
-        }
+        };
       },
     }),
     getCart: build.query<Cart, number>({
       query: (cartId) => apiEndpoints.getProduct(cartId),
     }),
     updateCart: build.mutation<Cart, Partial<Cart>>({
-      query: ({cartId, items}) => {
-        if(!cartId) {
+      query: ({ cartId, items }) => {
+        if (!cartId) {
           throw new Error("Cart does not exist!");
         }
         return {
           url: apiEndpoints.getCart(cartId),
-          method: 'PUT',
-          body: {items},
+          method: "PUT",
+          body: { items },
         };
       },
-      invalidatesTags: ['Cart'],
+      invalidatesTags: ["Cart"],
     }),
     deleteCart: build.mutation<Cart, Partial<Cart>>({
-      query: ({cartId}) => {
-        if(!cartId) throw new Error("Cart does not exist!");
+      query: ({ cartId }) => {
+        if (!cartId) throw new Error("Cart does not exist!");
         return {
           url: apiEndpoints.getCart(cartId),
-          method: 'DELETE',
+          method: "DELETE",
         };
       },
-      invalidatesTags: ['Cart'],
-    })
+      invalidatesTags: ["Cart"],
+    }),
   }),
 });
