@@ -1,20 +1,34 @@
 import { Chip } from "@ui";
-import { api } from "../../store/api.ts";
 
-export const CategoriesList = () => {
-  const { data, isLoading, isError } = api.useGetCategoriesListQuery();
+interface CategoryItem {
+  id: number;
+  name: string;
+}
+interface CategoriesListProps {
+  selectedCategory: number | null;
+  onCategoryChange: (categoryId: number) => void;
+  data?: CategoryItem[];
+}
 
-  if (isError) return <div>Error</div>;
-  if (isLoading) return <div>Is Loading...</div>;
-  console.log({ data });
+export const CategoriesList = ({
+  selectedCategory,
+  onCategoryChange,
+  data,
+}: CategoriesListProps) => {
+  if (!data) return <div>Error</div>;
 
   return (
     <>
       {data &&
         data.map((category) => {
           return (
-            <Chip icon="icon">
-              <div key={category.id}>{category.name}</div>
+            <Chip
+              icon="icon"
+              key={category.id}
+              onClick={() => onCategoryChange(category.id)}
+              isSelected={selectedCategory === category.id}
+            >
+              <div>{category.name}</div>
             </Chip>
           );
         })}

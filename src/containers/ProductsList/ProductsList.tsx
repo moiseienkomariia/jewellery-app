@@ -1,10 +1,27 @@
 import { api } from "../../store/api.ts";
 
-export const ProductsList = () => {
-  const { data, isLoading, isError } = api.useGetProductsListQuery();
+interface ProductsListProps {
+  selectedCategory: number | null;
+  searchTerm: string;
+}
+
+export const ProductsList = ({
+  selectedCategory,
+  searchTerm,
+}: ProductsListProps) => {
+  console.log({ CategoryName: selectedCategory });
+  const { data, isLoading, isError } = api.useGetProductsListQuery(
+    {
+      category: selectedCategory,
+      search: searchTerm,
+    },
+    {
+      refetchOnMountOrArgChange: true,
+    }
+  );
+
   if (isError) return <div>Products Error</div>;
   if (isLoading) return <div>Is Loading...</div>;
-  console.log({ data });
 
   return (
     <>

@@ -1,6 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { apiEndpoints } from "@config/apiEndpoints";
-import type { Cart, Category, Product } from "@types";
+import {
+  type ProductsListParams,
+  type Cart,
+  type Category,
+  type Product,
+} from "@types";
 import { API_URL } from "@config/constants";
 
 export const api = createApi({
@@ -12,8 +17,20 @@ export const api = createApi({
     getCategoriesList: build.query<Category[], void>({
       query: () => apiEndpoints.categories,
     }),
-    getProductsList: build.query<Product[], void>({
-      query: () => apiEndpoints.products,
+    getProductsList: build.query<Product[], ProductsListParams>({
+      query: ({ category, search }) => {
+        const params = new URLSearchParams();
+        console.log(search);
+
+        if (category) {
+          params.append("categoryId", category.toString());
+        }
+        if (search) params.append("search", search);
+
+        const queryString = params.toString();
+
+        return `/products?${queryString}`;
+      },
     }),
     getProduct: build.query<Product, number>({
       query: (productId) => apiEndpoints.getProduct(productId),

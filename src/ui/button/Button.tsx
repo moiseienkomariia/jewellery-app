@@ -1,7 +1,7 @@
 import { type PropsWithChildren } from "react";
-import Icon from "../Icon/Icon";
 import style from "./Button.module.scss";
 import { css } from "@helpers";
+import Icon from "../Icon/Icon";
 
 interface ButtonProps {
   label?: string;

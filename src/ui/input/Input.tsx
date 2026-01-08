@@ -1,9 +1,9 @@
-import React from "react";
+import React, { type ChangeEvent } from "react";
 import Icon from "../Icon/Icon";
 
 interface InputProps {
   value: string;
-  onChange: () => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   icon?: string;
 }
 

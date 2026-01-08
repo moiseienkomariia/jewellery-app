@@ -1,8 +1,8 @@
 export interface Category {
-  id: number,
-  name: string,
-  slug: string,
-};
+  id: number;
+  name: string;
+  slug: string;
+}
 
 export type Product = {
   id: number;
@@ -34,12 +34,17 @@ export type Product = {
   inStock: boolean;
 };
 
+export interface ProductsListParams {
+  category?: number | null;
+  search?: string;
+}
+
 export type CartItem = {
   productId: number;
   quantity: number;
-}
+};
 
 export interface Cart {
-  cartId: number,
-  items: CartItem[],
+  cartId: number;
+  items: CartItem[];
 }
