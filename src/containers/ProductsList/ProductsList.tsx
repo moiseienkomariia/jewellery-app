@@ -1,15 +1,15 @@
-import { useGetProductsListQuery } from "../../api.ts";
+import type { Product } from "@types";
 
-export const ProductsList = () => {
-  const { data, isLoading } = useGetProductsListQuery();
-  if (isLoading) return <div>Is Loading...</div>;
-  console.log({ data });
+interface ProductsListProps {
+  products: Product[];
+}
 
+export const ProductsList = ({ products }: ProductsListProps) => {
   return (
     <>
-      {data &&
-        data.map((product) => {
-          <div>{product.name}</div>;
+      {products &&
+        products.map((product) => {
+          return <div key={product.id}>{product.name}</div>;
         })}
     </>
   );

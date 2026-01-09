@@ -8,5 +8,3 @@ createRoot(document.getElementById("root") as HTMLElement).render(
     <App />
   </StrictMode>
 );
-
-createRoot(document.getElementById("root")!);

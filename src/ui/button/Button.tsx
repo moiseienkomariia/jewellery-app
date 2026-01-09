@@ -1,7 +1,7 @@
 import { type PropsWithChildren } from "react";
-import Icon from "../icon/Icon";
 import style from "./Button.module.scss";
-import { css } from "../../helpers/css";
+import { css } from "@helpers";
+import Icon from "../Icon/Icon";
 
 interface ButtonProps {
   label?: string;
@@ -18,7 +18,7 @@ const Button = ({
   onClick,
   icon,
   iconOnly,
-  children
+  children,
 }: PropsWithChildren<ButtonProps>) => {
   const styleSize = size && style[size];
   const styleType = type && style[type];

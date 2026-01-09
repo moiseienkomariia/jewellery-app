@@ -1,18 +1,36 @@
-import { api } from "../../api.ts";
-import { Chip } from "../../ui/chip/Chip.tsx";
+import { Chip } from "@ui";
 
-export const CategoriesList = () => {
-  const { data, isLoading } = api.useGetCategoriesListQuery();
-  if (isLoading) return <div>Is Loading...</div>;
-  console.log({ data });
+interface CategoryItem {
+  id: number;
+  name: string;
+}
+interface CategoriesListProps {
+  selectedCategory: number | null;
+  onCategoryChange: (categoryId: number) => void;
+  data?: CategoryItem[];
+}
+
+export const CategoriesList = ({
+  selectedCategory,
+  onCategoryChange,
+  data,
+}: CategoriesListProps) => {
+  if (!data) return <div>Error</div>;
 
   return (
     <>
       {data &&
         data.map((category) => {
-          <Chip icon="icon">
-            <div>{category.name}</div>
-          </Chip>;
+          return (
+            <Chip
+              icon="icon"
+              key={category.id}
+              onClick={() => onCategoryChange(category.id)}
+              isSelected={selectedCategory === category.id}
+            >
+              <div>{category.name}</div>
+            </Chip>
+          );
         })}
     </>
   );

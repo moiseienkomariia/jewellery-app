@@ -1,14 +1,15 @@
 export const apiEndpoints = Object.freeze({
-    categories: '/categories',
-    products: '/products',
-    users: '/users',
-    orders: '/orders',
-    cart: '/cart',
+  categories: "/categories",
+  products: "/products",
+  users: "/users",
+  orders: "/orders",
+  cart: "/cart",
 
-    getCategory: (id: string) => `/categories/${id}`,
-    getUser: (id: string) => `/user/${id}`,
-    getProduct: (id: string) => `/products/${id}`,
-    getOrder: (id: string) => `/orders/${id}`,
-    getProductsByCategory: (id: string) => `categories/${id}/products`,
-    getProductByRating: (rating: number) => `/products?rating=${rating}`,
-})
+  getCategory: (id: number) => `/categories/${id}`,
+  getUser: (id: number) => `/user/${id}`,
+  getProduct: (id: number) => `/products/${id}`,
+  getOrder: (id: number) => `/orders/${id}`,
+  getProductsByCategory: (id: number) => `categories/${id}/products`,
+  getProductByRating: (rating: number) => `/products?rating=${rating}`,
+  getCart: (id: number) => `/cart/${id}`,
+});
