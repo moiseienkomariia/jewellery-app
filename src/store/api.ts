@@ -7,6 +7,7 @@ import {
   type Product,
 } from "@types";
 import { API_URL } from "@config/constants";
+import { buildProductQueryURL } from "../helpers/buildProductQueryURL";
 
 export const api = createApi({
   reducerPath: "api",
@@ -19,15 +20,10 @@ export const api = createApi({
     }),
     getProductsList: build.query<Product[], ProductsListParams>({
       query: ({ category, search }) => {
-        const params = new URLSearchParams();
-        console.log(search);
-
-        if (category) {
-          params.append("categoryId", category.toString());
-        }
-        if (search) params.append("search", search);
-
-        const queryString = params.toString();
+        const queryString = buildProductQueryURL({
+          categoryId: category || undefined,
+          name: search,
+        });
 
         return `/products?${queryString}`;
       },

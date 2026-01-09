@@ -1,32 +1,14 @@
-import { api } from "../../store/api.ts";
+import type { Product } from "@types";
 
 interface ProductsListProps {
-  selectedCategory: number | null;
-  searchTerm: string;
+  products: Product[];
 }
 
-export const ProductsList = ({
-  selectedCategory,
-  searchTerm,
-}: ProductsListProps) => {
-  console.log({ CategoryName: selectedCategory });
-  const { data, isLoading, isError } = api.useGetProductsListQuery(
-    {
-      category: selectedCategory,
-      search: searchTerm,
-    },
-    {
-      refetchOnMountOrArgChange: true,
-    }
-  );
-
-  if (isError) return <div>Products Error</div>;
-  if (isLoading) return <div>Is Loading...</div>;
-
+export const ProductsList = ({ products }: ProductsListProps) => {
   return (
     <>
-      {data &&
-        data.map((product) => {
+      {products &&
+        products.map((product) => {
           return <div key={product.id}>{product.name}</div>;
         })}
     </>

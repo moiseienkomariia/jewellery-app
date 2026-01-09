@@ -10,7 +10,7 @@ const initialState: productsFiltersState = {
   searchTerm: "",
 };
 
-const productSlice = createSlice({
+export const productSlice = createSlice({
   name: "productsFilters",
   initialState: initialState,
   reducers: {
@@ -23,6 +23,7 @@ const productSlice = createSlice({
     setSearchTerm(state, action: PayloadAction<string>) {
       state.searchTerm = action.payload;
     },
+    // TODO rename function
     resetSearchItem(state) {
       state.searchTerm = "";
     },
