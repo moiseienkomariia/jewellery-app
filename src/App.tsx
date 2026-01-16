@@ -6,6 +6,7 @@ import { router } from "./routes/router";
 export const App = () => {
   return (
     <Provider store={store}>
+      {/* TODO przenieś provider do main.tsx */}
       <RouterProvider router={router} />
     </Provider>
   );

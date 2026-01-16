@@ -48,6 +48,12 @@ export type CartItem = {
 export interface Cart {
   cartId: number;
   items: CartItem[];
-  productId: number;
-  quantity: number;
+  subtotal: number;
+  deliveryFee: number;
+  total: number;
+}
+
+export interface UpdateCartRequest extends Partial<Cart> {
+  cartId: number;
+  items: CartItem[];
 }

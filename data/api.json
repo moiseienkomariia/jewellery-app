@@ -21,7 +21,6 @@
       "slug": "bracelets"
     }
   ],
-
   "products": [
     {
       "id": 1,
@@ -56,7 +55,9 @@
       "stone": "Blue Crystal",
       "weight": "0.35 ct",
       "description": "Elegant blue crystal ring crafted with precision and premium materials.",
-      "images": ["/images/products/blue-ring-1.png"],
+      "images": [
+        "/images/products/blue-ring-1.png"
+      ],
       "isFeatured": false,
       "inStock": true
     },
@@ -73,7 +74,9 @@
       "stone": "Diamond",
       "weight": "0.6 ct",
       "description": "Minimalist diamond necklace designed for everyday elegance.",
-      "images": ["/images/products/diamond-necklace-1.png"],
+      "images": [
+        "/images/products/diamond-necklace-1.png"
+      ],
       "isFeatured": true,
       "inStock": true
     },
@@ -90,12 +93,13 @@
       "stone": "Zircon",
       "weight": "0.25 ct",
       "description": "Lightweight rose gold earrings with subtle zircon sparkle.",
-      "images": ["/images/products/rose-earrings-1.png"],
+      "images": [
+        "/images/products/rose-earrings-1.png"
+      ],
       "isFeatured": false,
       "inStock": true
     }
   ],
-
   "carts": [
     {
       "id": 1,
@@ -116,9 +120,365 @@
       "deliveryFee": 50,
       "total": 970,
       "updatedAt": "2025-01-12T10:30:00Z"
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 2
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 3
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 4
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 5
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 6
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 7
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 8
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 9
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 10
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 11
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 12
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 13
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 14
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 15
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 16
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 17
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 18
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 19
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 20
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 21
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 22
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 23
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 24
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 25
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 26
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 27
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 28
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 29
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 30
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 31
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 32
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 33
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 34
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 35
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 36
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 37
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 38
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 39
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 40
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 41
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 42
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 43
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 44
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 45
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 46
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 47
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 48
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 49
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 50
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 51
+    },
+    {
+      "items": [],
+      "subtotal": 0,
+      "deliveryFee": 0,
+      "total": 0,
+      "id": 52
     }
   ],
-
   "orders": [
     {
       "id": 1,

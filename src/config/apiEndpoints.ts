@@ -3,7 +3,7 @@ export const apiEndpoints = Object.freeze({
   products: "/products",
   users: "/users",
   orders: "/orders",
-  cart: "/cart",
+  cart: "/carts",
 
   getCategory: (id: number) => `/categories/${id}`,
   getUser: (id: number) => `/user/${id}`,

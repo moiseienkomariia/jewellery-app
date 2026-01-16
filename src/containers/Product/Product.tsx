@@ -2,25 +2,26 @@ import { useParams } from "react-router-dom";
 import { api } from "../../store/api.ts";
 
 export const Product = () => {
-  const { id } = useParams<{ id: string }>();
-  const productId = Number(id);
+  // const { id } = useParams<{ id: string }>();
+  // const productId = Number(id);
 
-  const { data, isLoading, isError } = api.useGetProductQuery(productId);
-  if (isError) return <div>Products Error</div>;
-  if (isLoading) return <div>Is Loading...</div>;
+  // const [createCart, {}] = api.useCreateCartMutation();
 
-  if (!data) return null;
+  // if (isError) return <div>Products Error</div>;
+  // if (isLoading) return <div>Is Loading...</div>;
 
-  const handleAddToCart = (cartId, productId) => {
-    const cartId = sessionStorage.getItem("cartId");
+  // if (!data) return null;
 
-    // 1. Create cart if not exists
-    // 2. Add item to cart
-  };
+  // const handleAddToCart = (cartId: string, productId: string) => {
+  //   const cartId = sessionStorage.getItem("cartId");
+
+  //   // 1. Create cart if not exists
+  //   // 2. Add item to cart
+  // };
 
   return (
     <>
-      {data.images &&
+      {/* {data.images &&
         data.images.map((img, idx) => {
           return (
             <div>
@@ -38,7 +39,9 @@ export const Product = () => {
       <div>
         {data.price} {data.currency}
       </div>
-      <button onClick={handleAddToCart(cart.id, data.id)}>Add to cart</button>
+      <button onClick={() => handleAddToCart(data.id, data.id)}>
+        Add to cart
+      </button> */}
     </>
   );
 };

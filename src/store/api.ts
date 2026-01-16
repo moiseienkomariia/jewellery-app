@@ -5,6 +5,7 @@ import {
   type Cart,
   type Category,
   type Product,
+  type UpdateCartRequest,
 } from "@types";
 import { API_URL } from "@config/constants";
 import { buildProductQueryURL } from "../helpers/buildProductQueryURL";
@@ -31,13 +32,17 @@ export const api = createApi({
     getProduct: build.query<Product, number>({
       query: (productId) => apiEndpoints.getProduct(productId),
     }),
-    createCart: build.mutation<Cart, Partial<Cart>>({
+    createCart: build.mutation<Cart, void>({
       query: () => {
         return {
           url: apiEndpoints.cart,
           method: "POST",
           body: {
             items: [],
+            subtotal: 0,
+            // TODO add default fee
+            deliveryFee: 0,
+            total: 0,
           },
         };
       },
@@ -45,11 +50,8 @@ export const api = createApi({
     getCart: build.query<Cart, number>({
       query: (cartId) => apiEndpoints.getProduct(cartId),
     }),
-    updateCart: build.mutation<Cart, Partial<Cart>>({
+    updateCart: build.mutation<Cart, UpdateCartRequest>({
       query: ({ cartId, items }) => {
-        if (!cartId) {
-          throw new Error("Cart does not exist!");
-        }
         return {
           url: apiEndpoints.getCart(cartId),
           method: "PUT",
@@ -58,9 +60,8 @@ export const api = createApi({
       },
       invalidatesTags: ["Cart"],
     }),
-    deleteCart: build.mutation<Cart, Partial<Cart>>({
-      query: ({ cartId }) => {
-        if (!cartId) throw new Error("Cart does not exist!");
+    deleteCart: build.mutation<Cart, number>({
+      query: (cartId) => {
         return {
           url: apiEndpoints.getCart(cartId),
           method: "DELETE",
