@@ -20,11 +20,14 @@ export const productSlice = createSlice({
     resetCategory(state) {
       state.categoryId = null;
     },
+    changeCategory(state, action: PayloadAction<number>) {
+      state.categoryId =
+        state.categoryId === action.payload ? null : action.payload;
+    },
     setSearchTerm(state, action: PayloadAction<string>) {
       state.searchTerm = action.payload;
     },
-    // TODO rename function
-    resetSearchItem(state) {
+    resetSearchTerm(state) {
       state.searchTerm = "";
     },
     resetAll(state) {
@@ -38,7 +41,7 @@ export const {
   setCategory,
   resetCategory,
   setSearchTerm,
-  resetSearchItem,
+  resetSearchTerm,
   resetAll,
 } = productSlice.actions;
 export default productSlice.reducer;

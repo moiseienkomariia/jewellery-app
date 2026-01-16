@@ -7,3 +7,5 @@ export const selectSelectedCategory = (state: RootState) =>
 
 export const selectSearchTerm = (state: RootState) =>
   state.productFilters.searchTerm;
+
+export const selectCart = (state: RootState) => state.cart;

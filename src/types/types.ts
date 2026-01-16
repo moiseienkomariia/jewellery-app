@@ -42,9 +42,12 @@ export interface ProductsListParams {
 export type CartItem = {
   productId: number;
   quantity: number;
+  price: number;
 };
 
 export interface Cart {
   cartId: number;
   items: CartItem[];
+  productId: number;
+  quantity: number;
 }

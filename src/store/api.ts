@@ -31,7 +31,7 @@ export const api = createApi({
     getProduct: build.query<Product, number>({
       query: (productId) => apiEndpoints.getProduct(productId),
     }),
-    addCart: build.mutation<Cart, Partial<Cart>>({
+    createCart: build.mutation<Cart, Partial<Cart>>({
       query: () => {
         return {
           url: apiEndpoints.cart,

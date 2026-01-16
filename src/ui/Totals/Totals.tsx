@@ -6,21 +6,22 @@ import type { PropsWithChildren } from "react";
 import SummaryLabel from "./SummaryLabel";
 import SummaryValue from "./SummaryValue";
 
-// TODO zastosuj kompozycję
 interface TotalsProps {
   items: TotalsItemPropsInterface[];
 }
 
-const Totals = ({
-  items,
-}: PropsWithChildren<TotalsProps>) => {
+const Totals = ({ items }: PropsWithChildren<TotalsProps>) => {
   return (
     <div className={style.totals}>
       <TotalsHeader>Header</TotalsHeader>
 
       {items &&
         items.map((item) => (
-          <TotalsItem label={item.label} value={item.value} currency={item.currency} />
+          <TotalsItem
+            label={item.label}
+            value={item.value}
+            currency={item.currency}
+          />
         ))}
       <TotalsSummary>
         <SummaryLabel label="Total" />
