@@ -41,12 +41,13 @@ export interface ProductsListParams {
 
 export type CartItem = {
   productId: number;
+  productName: string;
   quantity: number;
   price: number;
 };
 
 export interface Cart {
-  cartId: number;
+  id: number;
   items: CartItem[];
   subtotal: number;
   deliveryFee: number;

@@ -1,3 +1,3 @@
 export * from "./CategoriesList/CategoriesList";
-export * from "./Product/Product";
+export * from "../routes/ProductPage/ProductPage";
 export * from "./ProductsList/ProductsList";

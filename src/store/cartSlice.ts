@@ -1,14 +1,11 @@
-import {
-  createSlice,
-  type Dispatch,
-  type GetState,
-  type PayloadAction,
-  type ThunkAction,
-} from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { api } from "./api";
+import { DEFAULT_DELIVERY_FEE } from "@config/constants";
+import type { AppDispatch, RootState } from "./store";
 
 export interface CartItem {
   productId: number;
+  productName: string;
   quantity: number;
   price: number;
 }
@@ -18,21 +15,21 @@ export interface CartState {
   subtotal: number;
   deliveryFee: number;
   total: number;
-  cartId: number | null;
+  id: number | null;
 }
 
 const initialState: CartState = {
-  cartId: null,
+  id: null,
   items: [],
   subtotal: 0,
-  deliveryFee: 50,
-  total: 50,
+  deliveryFee: DEFAULT_DELIVERY_FEE,
+  total: DEFAULT_DELIVERY_FEE,
 };
 
 const calculateTotals = (items: CartItem[], deliveryFee: number) => {
   const subtotal = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
   const total = subtotal + deliveryFee;
   return { subtotal, total };
@@ -43,11 +40,11 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     setCartId(state, action: PayloadAction<number>) {
-      state.cartId = action.payload;
+      state.id = action.payload;
     },
     addItem(state, action: PayloadAction<CartItem>) {
       const existingItems = state.items.find(
-        (item) => item.productId === action.payload.productId
+        (item) => item.productId === action.payload.productId,
       );
       if (existingItems) {
         existingItems.quantity += action.payload.quantity;
@@ -61,7 +58,7 @@ export const cartSlice = createSlice({
     },
     removeItem(state, action: PayloadAction<number>) {
       state.items = state.items.filter(
-        (item) => item.productId !== action.payload
+        (item) => item.productId !== action.payload,
       );
 
       const results = calculateTotals(state.items, state.deliveryFee);
@@ -70,15 +67,24 @@ export const cartSlice = createSlice({
     },
     increment(state, { payload: productId }: PayloadAction<number>) {
       const index = state.items.findIndex(
-        (item) => item.productId === productId
+        (item) => item.productId === productId,
       );
       state.items[index].quantity++;
+      const totals = calculateTotals(state.items, state.deliveryFee);
+      state.subtotal = totals.subtotal;
+      state.total = totals.total;
     },
     decrement(state, { payload: productId }: PayloadAction<number>) {
       const index = state.items.findIndex(
-        (item) => item.productId === productId
+        (item) => item.productId === productId,
       );
-      state.items[index].quantity--;
+      if (index === -1) return;
+      if (state.items[index].quantity > 1) {
+        state.items[index].quantity--;
+      }
+      const totals = calculateTotals(state.items, state.deliveryFee);
+      state.subtotal = totals.subtotal;
+      state.total = totals.total;
     },
     clearCart(state) {
       state.items = [];
@@ -88,16 +94,22 @@ export const cartSlice = createSlice({
   },
 });
 
-// TODO fix types
-export const initializeCart = () => async (dispatch, getState) => {
-  const storedCartId = sessionStorage.getItem("cartId");
+export const initializeCart =
+  () => async (dispatch: AppDispatch, getState: () => RootState) => {
+    const state = getState();
+    let storedCartId = state.cart.id;
 
-  if (storedCartId) {
-    return;
-  }
+    if (storedCartId) {
+      return storedCartId;
+    }
 
-  const promise = dispatch(api.endpoints.createCart.initiate());
-  const { data } = await promise;
+    const promise = dispatch(api.endpoints.createCart.initiate());
+    const { data } = await promise;
 
-  dispatch(cartSlice.actions.setCartId(data.id));
-};
+    if (data) {
+      dispatch(cartSlice.actions.setCartId(data.id));
+      storedCartId = data.id;
+    } else {
+      console.log("Failed to initialize cart");
+    }
+  };

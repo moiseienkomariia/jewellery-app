@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import { HomePage } from "../containers/HomePage/HomePage";
-import { Product } from "@containers";
-import { Cart } from "../containers/Cart/Cart";
-import { Checkout } from "../containers/Checkout/Checkout";
+import { HomePage } from "./HomePage/HomePage";
+import { ProductPage } from "@containers";
+import { CartPage } from "./CartPage/CartPage";
+import { CheckoutPage } from "./CheckoutPage/CheckoutPage";
 
 export const ROUTES = {
   HOME: "/",
@@ -19,14 +19,14 @@ export const router = createBrowserRouter([
   },
   {
     path: ROUTES.PRODUCT,
-    element: <Product />,
+    element: <ProductPage />,
   },
   {
     path: ROUTES.CART,
-    element: <Cart />,
+    element: <CartPage />,
   },
   {
     path: ROUTES.CHECKOUT,
-    element: <Checkout />,
+    element: <CheckoutPage />,
   },
 ]);

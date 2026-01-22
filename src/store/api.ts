@@ -9,6 +9,7 @@ import {
 } from "@types";
 import { API_URL } from "@config/constants";
 import { buildProductQueryURL } from "../helpers/buildProductQueryURL";
+import { DEFAULT_DELIVERY_FEE } from "@config/constants";
 
 export const api = createApi({
   reducerPath: "api",
@@ -40,8 +41,7 @@ export const api = createApi({
           body: {
             items: [],
             subtotal: 0,
-            // TODO add default fee
-            deliveryFee: 0,
+            deliveryFee: DEFAULT_DELIVERY_FEE,
             total: 0,
           },
         };
