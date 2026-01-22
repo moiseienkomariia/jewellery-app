@@ -4,7 +4,7 @@ import { useCartActions } from "../../hooks/useCartActions";
 
 import { useEffect } from "react";
 import { initializeCart } from "@store/cartSlice";
-import { CartItemRow } from "./CartItem";
+import { CartItemRow } from "./CartItemRow";
 
 export const CartPage = () => {
   const dispatch = useDispatch<AppDispatch>();
