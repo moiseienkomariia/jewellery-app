@@ -26,3 +26,9 @@ Logika koszyka:
 1. Jezeli wchodzimy na stronę i w sessionStorage jest cartId to wykorzystaj je jako aktualny koszyk.
 2. Jezeli nie ma cartId w sessionStorage to zrób POST i utwórz nowy koszyk i zapisz jego id w sessionStorage.
 3. Dodanie/usuwanie z koszyka powinno triggerować mutację do zmiany koszyka(wysłania jego aktualnego stanu do backendu).
+
+Co zostalo do zrobienia?
+
+1. Trzeba przerobic akcje ze store'u cartSlice na funkcje ktore aktualizuja dane koszyka i przekazuja je do updateCart.
+2. Funkcje do przerobienia: increment, decrement, clearCart
+3. Trzeba poczyścić komponenty ze starych akcji
