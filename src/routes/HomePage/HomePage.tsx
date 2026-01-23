@@ -1,18 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useProductActions } from "../../hooks/useProductActions";
-import {
-  selectCartId,
-  selectSearchTerm,
-  selectSelectedCategory,
-} from "@store/selectors";
+import { selectSearchTerm, selectSelectedCategory } from "@store/selectors";
 import { api } from "@store/api";
-import { useCallback, useEffect, useMemo, type ChangeEvent } from "react";
+import { useCallback, useMemo, type ChangeEvent } from "react";
 import { debounce } from "lodash";
 import Search from "../../containers/Search/Search";
 import { CategoriesList } from "../../containers/CategoriesList/CategoriesList";
 import { ProductsList } from "../../containers/ProductsList/ProductsList";
-import { initializeCart } from "@store/cartSlice";
-import type { AppDispatch } from "@store/store";
 import { ROUTES } from "../router";
 import { Link } from "react-router-dom";
 
@@ -30,23 +24,22 @@ export const HomePage = () => {
     },
     {
       refetchOnMountOrArgChange: true,
-    },
+    }
   );
-  const dispatch = useDispatch<AppDispatch>();
-  const cartId = useSelector(selectCartId);
+
   const debouncedSearch = useMemo(
     () =>
       debounce((value: string) => {
         setSearchTerm(value);
       }, DEBOUNCE_TIME_MS),
-    [setSearchTerm],
+    [setSearchTerm]
   );
 
   const handleSearchChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       debouncedSearch(e.target.value);
     },
-    [debouncedSearch],
+    [debouncedSearch]
   );
 
   const { changeCategory } = useProductActions();
@@ -54,12 +47,8 @@ export const HomePage = () => {
     (categoryId: number) => {
       changeCategory(categoryId);
     },
-    [changeCategory],
+    [changeCategory]
   );
-
-  useEffect(() => {
-    if (!cartId) dispatch(initializeCart());
-  }, [cartId, dispatch]);
 
   if (isError) return <div>Products Error</div>;
   if (isLoading) return <div>Is Loading...</div>;

@@ -48,7 +48,8 @@ export const api = createApi({
       },
     }),
     getCart: build.query<Cart, number>({
-      query: (cartId) => apiEndpoints.getProduct(cartId),
+      query: (cartId) => apiEndpoints.getCart(cartId),
+      providesTags: ["Cart"],
     }),
     updateCart: build.mutation<Cart, UpdateCartRequest>({
       query: ({ cartId, items }) => {

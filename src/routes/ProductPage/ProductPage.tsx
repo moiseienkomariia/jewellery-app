@@ -1,54 +1,26 @@
 import { useParams } from "react-router-dom";
 import { api } from "../../store/api.ts";
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "@store/store.ts";
-import { useEffect } from "react";
-import { cartSlice, initializeCart } from "@store/cartSlice.ts";
+import { useCartActions } from "../../hooks/useCartActions.ts";
 
 export const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const productId = Number(id);
-
-  const dispatch = useDispatch<AppDispatch>();
-  const cartId = useSelector((state: RootState) => state.cart.id);
-  const cartItems = useSelector((state: RootState) => state.cart.items);
-
   const {
     data: product,
     isLoading,
     isError,
   } = api.useGetProductQuery(productId);
-  const [updateCart] = api.useUpdateCartMutation();
-
-  useEffect(() => {
-    if (!cartId) dispatch(initializeCart());
-  }, [cartId, dispatch]);
+  const { addToCart } = useCartActions();
 
   const handleAddToCart = () => {
-    if (!product || !cartId) return;
+    if (!product) return;
 
-    dispatch(
-      cartSlice.actions.addItem({
-        productId: product.id,
-        productName: product.name,
-        quantity: 1,
-        price: product.price,
-      }),
-    );
-
-    updateCart({
-      cartId,
-      items: [
-        ...cartItems,
-        {
-          productId: product.id,
-          productName: product.name,
-          quantity: 1,
-          price: product.price,
-        },
-      ],
+    addToCart({
+      productId: product.id,
+      productName: product.name,
+      quantity: 1,
+      price: product.price,
     });
-    console.log({ cartId, cartItems });
   };
 
   if (isLoading) return <p>Loading...</p>;

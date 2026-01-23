@@ -11,4 +11,4 @@ export const selectSearchTerm = (state: RootState) =>
 
 export const selectCart = (state: RootState) => state.cart;
 
-export const selectCartId = createSelector(selectCart, (cart) => cart.cartId);
+export const selectCartId = createSelector(selectCart, (cart) => cart.id);

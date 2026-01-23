@@ -26,10 +26,10 @@ const initialState: CartState = {
   total: DEFAULT_DELIVERY_FEE,
 };
 
-const calculateTotals = (items: CartItem[], deliveryFee: number) => {
+export const calculateTotals = (items: CartItem[], deliveryFee: number) => {
   const subtotal = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0,
+    0
   );
   const total = subtotal + deliveryFee;
   return { subtotal, total };
@@ -44,7 +44,7 @@ export const cartSlice = createSlice({
     },
     addItem(state, action: PayloadAction<CartItem>) {
       const existingItems = state.items.find(
-        (item) => item.productId === action.payload.productId,
+        (item) => item.productId === action.payload.productId
       );
       if (existingItems) {
         existingItems.quantity += action.payload.quantity;
@@ -58,7 +58,7 @@ export const cartSlice = createSlice({
     },
     removeItem(state, action: PayloadAction<number>) {
       state.items = state.items.filter(
-        (item) => item.productId !== action.payload,
+        (item) => item.productId !== action.payload
       );
 
       const results = calculateTotals(state.items, state.deliveryFee);
@@ -67,7 +67,7 @@ export const cartSlice = createSlice({
     },
     increment(state, { payload: productId }: PayloadAction<number>) {
       const index = state.items.findIndex(
-        (item) => item.productId === productId,
+        (item) => item.productId === productId
       );
       state.items[index].quantity++;
       const totals = calculateTotals(state.items, state.deliveryFee);
@@ -76,7 +76,7 @@ export const cartSlice = createSlice({
     },
     decrement(state, { payload: productId }: PayloadAction<number>) {
       const index = state.items.findIndex(
-        (item) => item.productId === productId,
+        (item) => item.productId === productId
       );
       if (index === -1) return;
       if (state.items[index].quantity > 1) {
@@ -97,18 +97,37 @@ export const cartSlice = createSlice({
 export const initializeCart =
   () => async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState();
-    let storedCartId = state.cart.id;
+    let storedCartId = Number(
+      state.cart.id || sessionStorage.getItem("cartId")
+    );
 
+    // TODO simplify function logic
+    console.log(storedCartId);
     if (storedCartId) {
-      return storedCartId;
+      const promise = dispatch(api.endpoints.getCart.initiate(storedCartId));
+
+      const { data } = await promise;
+
+      if (data) {
+        console.log(data);
+        storedCartId = data.id;
+        console.log("stored cart id", storedCartId);
+        sessionStorage.setItem("cartId", storedCartId.toString());
+        return dispatch(cartSlice.actions.setCartId(data.id));
+      } else {
+        console.log("Failed to initialize cart");
+      }
+
+      return;
     }
 
     const promise = dispatch(api.endpoints.createCart.initiate());
     const { data } = await promise;
 
     if (data) {
-      dispatch(cartSlice.actions.setCartId(data.id));
       storedCartId = data.id;
+      sessionStorage.setItem("cartId", storedCartId.toString());
+      return dispatch(cartSlice.actions.setCartId(data.id));
     } else {
       console.log("Failed to initialize cart");
     }

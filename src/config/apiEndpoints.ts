@@ -11,5 +11,5 @@ export const apiEndpoints = Object.freeze({
   getOrder: (id: number) => `/orders/${id}`,
   getProductsByCategory: (id: number) => `categories/${id}/products`,
   getProductByRating: (rating: number) => `/products?rating=${rating}`,
-  getCart: (id: number) => `/cart/${id}`,
+  getCart: (id: number) => `/carts/${id}`,
 });

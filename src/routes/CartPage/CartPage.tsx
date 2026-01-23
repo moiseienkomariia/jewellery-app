@@ -1,37 +1,30 @@
-import type { AppDispatch, RootState } from "@store/store";
-import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "@store/store";
+import { useSelector } from "react-redux";
 import { useCartActions } from "../../hooks/useCartActions";
 
-import { useEffect } from "react";
-import { initializeCart } from "@store/cartSlice";
 import { CartItemRow } from "./CartItemRow";
 
 export const CartPage = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const cartState = useSelector((state: RootState) => state.cart);
-  const { removeItem, clearCart, increment, decrement } = useCartActions();
-
-  useEffect(() => {
-    dispatch(initializeCart());
-  }, [dispatch]);
+  const { removeFromCart } = useCartActions();
 
   const handleIncrement = (productId: number) => {
     if (!cartState.id) return;
-    increment(productId);
+    // increment(productId);
   };
 
   const handleDecrement = (productId: number) => {
     if (!cartState.id) return;
-    decrement(productId);
+    // decrement(productId);
   };
 
   const handleRemoveItem = (productId: number) => {
     if (!cartState.id) return;
-    removeItem(productId);
+    removeFromCart(productId);
   };
 
   const handleClearCart = () => {
-    clearCart();
+    // clearCart();
   };
 
   return (
