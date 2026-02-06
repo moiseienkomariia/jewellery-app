@@ -32,9 +32,8 @@ export const ProductPage = () => {
       {product.images &&
         product.images.map((img, idx) => {
           return (
-            <div>
+            <div key={idx}>
               <img
-                key={idx}
                 style={{ width: "80px", height: "auto" }}
                 src={`../../../public/${img}`}
                 alt={`alt: ${product.name}`}

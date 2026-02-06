@@ -2,6 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { api } from "./api";
 import { DEFAULT_DELIVERY_FEE } from "@config/constants";
 import type { AppDispatch, RootState } from "./store";
+import type { Cart } from "@types";
 
 export interface CartItem {
   productId: number;
@@ -29,7 +30,7 @@ const initialState: CartState = {
 export const calculateTotals = (items: CartItem[], deliveryFee: number) => {
   const subtotal = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
   const total = subtotal + deliveryFee;
   return { subtotal, total };
@@ -44,7 +45,7 @@ export const cartSlice = createSlice({
     },
     addItem(state, action: PayloadAction<CartItem>) {
       const existingItems = state.items.find(
-        (item) => item.productId === action.payload.productId
+        (item) => item.productId === action.payload.productId,
       );
       if (existingItems) {
         existingItems.quantity += action.payload.quantity;
@@ -58,25 +59,17 @@ export const cartSlice = createSlice({
     },
     removeItem(state, action: PayloadAction<number>) {
       state.items = state.items.filter(
-        (item) => item.productId !== action.payload
+        (item) => item.productId !== action.payload,
       );
 
       const results = calculateTotals(state.items, state.deliveryFee);
       state.subtotal = results.subtotal;
       state.total = results.total;
     },
-    increment(state, { payload: productId }: PayloadAction<number>) {
-      const index = state.items.findIndex(
-        (item) => item.productId === productId
-      );
-      state.items[index].quantity++;
-      const totals = calculateTotals(state.items, state.deliveryFee);
-      state.subtotal = totals.subtotal;
-      state.total = totals.total;
-    },
+
     decrement(state, { payload: productId }: PayloadAction<number>) {
       const index = state.items.findIndex(
-        (item) => item.productId === productId
+        (item) => item.productId === productId,
       );
       if (index === -1) return;
       if (state.items[index].quantity > 1) {
@@ -98,20 +91,17 @@ export const initializeCart =
   () => async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState();
     let storedCartId = Number(
-      state.cart.id || sessionStorage.getItem("cartId")
+      state.cart.id || sessionStorage.getItem("cartId"),
     );
 
     // TODO simplify function logic
-    console.log(storedCartId);
     if (storedCartId) {
       const promise = dispatch(api.endpoints.getCart.initiate(storedCartId));
 
       const { data } = await promise;
 
       if (data) {
-        console.log(data);
         storedCartId = data.id;
-        console.log("stored cart id", storedCartId);
         sessionStorage.setItem("cartId", storedCartId.toString());
         return dispatch(cartSlice.actions.setCartId(data.id));
       } else {
@@ -132,3 +122,81 @@ export const initializeCart =
       console.log("Failed to initialize cart");
     }
   };
+
+export const incrementItem =
+  (productId: number, cart: Cart) => async (dispatch: AppDispatch) => {
+    if (!cart.id) return;
+
+    const clonedCart = structuredClone(cart);
+
+    clonedCart.items = clonedCart.items.map((item) =>
+      item.productId === productId
+        ? { ...item, quantity: item.quantity + 1 }
+        : item,
+    );
+
+    const totals = calculateTotals(
+      clonedCart.items,
+      clonedCart.deliveryFee ? clonedCart.deliveryFee : DEFAULT_DELIVERY_FEE,
+    );
+    clonedCart.subtotal = totals.subtotal;
+    clonedCart.total = totals.total;
+
+    await dispatch(
+      api.endpoints.updateCart.initiate({
+        cartId: clonedCart.id,
+        items: clonedCart.items,
+      }),
+    );
+  };
+
+export const decrementItem =
+  (productId: number, cart: Cart) => async (dispatch: AppDispatch) => {
+    if (!cart.id) return;
+
+    const clonedCart = structuredClone(cart);
+
+    clonedCart.items = clonedCart.items.map((item) =>
+      item.productId === productId
+        ? { ...item, quantity: Math.max(item.quantity - 1, 1) }
+        : item,
+    );
+
+    const totals = calculateTotals(
+      clonedCart.items,
+      clonedCart.deliveryFee ? clonedCart.deliveryFee : DEFAULT_DELIVERY_FEE,
+    );
+    clonedCart.subtotal = totals.subtotal;
+    clonedCart.total = totals.total;
+
+    console.log(totals, clonedCart.subtotal, clonedCart.total);
+
+    await dispatch(
+      api.endpoints.updateCart.initiate({
+        cartId: clonedCart.id,
+        items: clonedCart.items,
+        subtotal: clonedCart.subtotal,
+        total: clonedCart.total,
+      }),
+    );
+  };
+
+export const clearCart = (cart: Cart) => async (dispatch: AppDispatch) => {
+  if (!cart.id) return;
+  const clonedCart = structuredClone(cart);
+  clonedCart.items = [];
+
+  clonedCart.subtotal = 0;
+  clonedCart.total = clonedCart.deliveryFee
+    ? clonedCart.deliveryFee
+    : DEFAULT_DELIVERY_FEE;
+
+  await dispatch(
+    api.endpoints.updateCart.initiate({
+      cartId: clonedCart.id,
+      items: clonedCart.items,
+      subtotal: clonedCart.subtotal,
+      total: clonedCart.total,
+    }),
+  );
+};

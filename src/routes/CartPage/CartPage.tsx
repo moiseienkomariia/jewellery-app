@@ -1,54 +1,59 @@
-import type { RootState } from "@store/store";
-import { useSelector } from "react-redux";
-import { useCartActions } from "../../hooks/useCartActions";
+import type { AppDispatch } from "@store/store";
+import { useDispatch } from "react-redux";
+import { useCart, useCartActions } from "../../hooks/useCartActions";
 
 import { CartItemRow } from "./CartItemRow";
+import { incrementItem, decrementItem, clearCart } from "@store/cartSlice";
+import type { Cart, CartItem } from "@types";
 
 export const CartPage = () => {
-  const cartState = useSelector((state: RootState) => state.cart);
-  const { removeFromCart } = useCartActions();
+  const { data: cart, isLoading } = useCart();
 
-  const handleIncrement = (productId: number) => {
-    if (!cartState.id) return;
-    // increment(productId);
+  const { removeFromCart } = useCartActions();
+  const dispatch = useDispatch<AppDispatch>();
+
+  if (isLoading || !cart) return <p>Loading...</p>;
+
+  const handleIncrement = (productId: number, cart: Cart) => {
+    dispatch(incrementItem(productId, cart));
   };
 
-  const handleDecrement = (productId: number) => {
-    if (!cartState.id) return;
-    // decrement(productId);
+  const handleDecrement = (productId: number, cart: Cart) => {
+    dispatch(decrementItem(productId, cart));
   };
 
   const handleRemoveItem = (productId: number) => {
-    if (!cartState.id) return;
     removeFromCart(productId);
   };
 
-  const handleClearCart = () => {
-    // clearCart();
+  const handleClearCart = (cart: Cart) => {
+    dispatch(clearCart(cart));
   };
+
+  console.log(cart);
 
   return (
     <>
       <div>Cart</div>
 
-      {cartState.items.map((item) => (
+      {cart.items.map((item: CartItem) => (
         <CartItemRow
           item={item}
-          handleDecrement={handleDecrement}
-          handleIncrement={handleIncrement}
+          handleDecrement={() => handleDecrement(item.productId, cart)}
+          handleIncrement={() => handleIncrement(item.productId, cart)}
           handleRemoveItem={handleRemoveItem}
         />
       ))}
       <hr />
       <div>
         <span>Delivery: </span>
-        <span>{cartState.deliveryFee}</span>
+        <span>{cart.deliveryFee}</span>
       </div>
       <div>
         <span>Total: </span>
-        <span>{cartState.total}</span>
+        <span>{cart.total}</span>
       </div>
-      <button onClick={() => handleClearCart()}>Clear</button>
+      <button onClick={() => handleClearCart(cart)}>Clear</button>
     </>
   );
 };

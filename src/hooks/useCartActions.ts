@@ -26,7 +26,7 @@ export const useCartActions = () => {
       const clonedCart = structuredClone(cart);
 
       const existingItems = clonedCart.items.find(
-        (item) => item.productId === item.productId
+        (i) => i.productId === item.productId,
       );
       if (existingItems) {
         existingItems.quantity += item.quantity;
@@ -40,7 +40,7 @@ export const useCartActions = () => {
 
       await updateCart({ ...clonedCart, cartId });
     },
-    [cart, cartId, updateCart]
+    [cart, cartId, updateCart],
   );
 
   const removeFromCart = useCallback(
@@ -49,7 +49,7 @@ export const useCartActions = () => {
 
       const clonedCart = structuredClone(cart);
       clonedCart.items = clonedCart.items.filter(
-        (item) => item.productId !== productId
+        (item) => item.productId !== productId,
       );
 
       const results = calculateTotals(clonedCart.items, clonedCart.deliveryFee);
@@ -57,7 +57,7 @@ export const useCartActions = () => {
       clonedCart.total = results.total;
       await updateCart({ ...clonedCart, cartId });
     },
-    [cart, cartId, updateCart]
+    [cart, cartId, updateCart],
   );
 
   return useMemo(
@@ -65,6 +65,6 @@ export const useCartActions = () => {
       addToCart,
       removeFromCart,
     }),
-    [addToCart, removeFromCart]
+    [addToCart, removeFromCart],
   );
 };
