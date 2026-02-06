@@ -30,8 +30,6 @@ export const CartPage = () => {
     dispatch(clearCart(cart));
   };
 
-  console.log(cart);
-
   return (
     <>
       <div>Cart</div>

@@ -1,6 +1,7 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { api } from "../../store/api.ts";
 import { useCartActions } from "../../hooks/useCartActions.ts";
+import { ROUTES } from "../router.tsx";
 
 export const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -47,6 +48,9 @@ export const ProductPage = () => {
         {product.price} {product.currency}
       </div>
       <button onClick={() => handleAddToCart()}>Add to cart</button>
+
+      <hr />
+      <Link to={ROUTES.CART}>Go To Cart</Link>
     </>
   );
 };
