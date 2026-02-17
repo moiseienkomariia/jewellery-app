@@ -1,7 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import { api } from "../../store/api.ts";
-import { useCartActions } from "../../hooks/useCartActions.ts";
+import { useCart } from "../../hooks/useCartActions.ts";
 import { ROUTES } from "../router.tsx";
+import { useDispatch } from "react-redux";
+import { incrementItem } from "@store/cartSlice.ts";
+import type { AppDispatch } from "@store/store.ts";
 
 export const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -11,17 +14,23 @@ export const ProductPage = () => {
     isLoading,
     isError,
   } = api.useGetProductQuery(productId);
-  const { addToCart } = useCartActions();
+  const dispatch = useDispatch<AppDispatch>();
+  const { data: cart } = useCart();
 
   const handleAddToCart = () => {
-    if (!product) return;
+    if (!product || !cart) return;
 
-    addToCart({
-      productId: product.id,
-      productName: product.name,
-      quantity: 1,
-      price: product.price,
-    });
+    dispatch(
+      incrementItem(
+        {
+          productId: product.id,
+          productName: product.name,
+          quantity: 1,
+          price: product.price,
+        },
+        cart
+      )
+    );
   };
 
   if (isLoading) return <p>Loading...</p>;

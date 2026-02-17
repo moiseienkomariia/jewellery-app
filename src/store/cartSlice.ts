@@ -31,7 +31,7 @@ export const calculateTotals = (items: CartItem[], deliveryFee: number) => {
   const delivery = deliveryFee ? deliveryFee : DEFAULT_DELIVERY_FEE;
   const subtotal = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0,
+    0
   );
   const total = subtotal + delivery;
   return { subtotal, total };
@@ -44,47 +44,6 @@ export const cartSlice = createSlice({
     setCartId(state, action: PayloadAction<number>) {
       state.id = action.payload;
     },
-    addItem(state, action: PayloadAction<CartItem>) {
-      const existingItems = state.items.find(
-        (item) => item.productId === action.payload.productId,
-      );
-      if (existingItems) {
-        existingItems.quantity += action.payload.quantity;
-      } else {
-        state.items.push(action.payload);
-      }
-
-      const results = calculateTotals(state.items, state.deliveryFee);
-      state.subtotal = results.subtotal;
-      state.total = results.total;
-    },
-    removeItem(state, action: PayloadAction<number>) {
-      state.items = state.items.filter(
-        (item) => item.productId !== action.payload,
-      );
-
-      const results = calculateTotals(state.items, state.deliveryFee);
-      state.subtotal = results.subtotal;
-      state.total = results.total;
-    },
-
-    decrement(state, { payload: productId }: PayloadAction<number>) {
-      const index = state.items.findIndex(
-        (item) => item.productId === productId,
-      );
-      if (index === -1) return;
-      if (state.items[index].quantity > 1) {
-        state.items[index].quantity--;
-      }
-      const totals = calculateTotals(state.items, state.deliveryFee);
-      state.subtotal = totals.subtotal;
-      state.total = totals.total;
-    },
-    clearCart(state) {
-      state.items = [];
-      state.subtotal = 0;
-      state.total = state.deliveryFee;
-    },
   },
 });
 
@@ -92,7 +51,7 @@ export const initializeCart =
   () => async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState();
     let storedCartId = Number(
-      state.cart.id || sessionStorage.getItem("cartId"),
+      state.cart.id || sessionStorage.getItem("cartId")
     );
 
     // TODO simplify function logic
@@ -125,62 +84,69 @@ export const initializeCart =
   };
 
 export const incrementItem =
-  (productId: number, cart: Cart) => async (dispatch: AppDispatch) => {
+  ({ productId, productName, price }: CartItem, cart: Cart) =>
+  async (dispatch: AppDispatch) => {
     if (!cart.id) return;
 
     const clonedCart = structuredClone(cart);
 
-    clonedCart.items = clonedCart.items.map((item) =>
-      item.productId === productId
-        ? { ...item, quantity: item.quantity + 1 }
-        : item,
+    const incrementedIdx = clonedCart.items.findIndex(
+      (item) => item.productId === productId
     );
+
+    if (incrementedIdx >= 0) {
+      clonedCart.items[incrementedIdx].quantity += 1;
+    } else {
+      clonedCart.items.push({
+        productId,
+        productName,
+        quantity: 1,
+        price,
+      });
+    }
 
     const totals = calculateTotals(
       clonedCart.items,
-      clonedCart.deliveryFee ? clonedCart.deliveryFee : DEFAULT_DELIVERY_FEE,
+      clonedCart.deliveryFee ? clonedCart.deliveryFee : DEFAULT_DELIVERY_FEE
     );
     clonedCart.subtotal = totals.subtotal;
     clonedCart.total = totals.total;
 
-    await dispatch(
+    return dispatch(
       api.endpoints.updateCart.initiate({
+        ...clonedCart,
         cartId: clonedCart.id,
-        items: clonedCart.items,
-        total: clonedCart.total,
-        subtotal: clonedCart.subtotal,
-      }),
+      })
     );
   };
 
 export const decrementItem =
-  (productId: number, cart: Cart) => async (dispatch: AppDispatch) => {
+  (productId: number, cart: Cart, decrementAmount = 1) =>
+  async (dispatch: AppDispatch) => {
     if (!cart.id) return;
 
     const clonedCart = structuredClone(cart);
 
-    clonedCart.items = clonedCart.items.map((item) =>
-      item.productId === productId
-        ? { ...item, quantity: Math.max(item.quantity - 1, 1) }
-        : item,
-    );
+    clonedCart.items = clonedCart.items
+      .map((item) =>
+        item.productId === productId
+          ? { ...item, quantity: item.quantity - decrementAmount }
+          : item
+      )
+      .filter((item) => item.quantity > 0);
 
     const totals = calculateTotals(
       clonedCart.items,
-      clonedCart.deliveryFee ? clonedCart.deliveryFee : DEFAULT_DELIVERY_FEE,
+      clonedCart.deliveryFee ? clonedCart.deliveryFee : DEFAULT_DELIVERY_FEE
     );
     clonedCart.subtotal = totals.subtotal;
     clonedCart.total = totals.total;
 
-    console.log(totals, clonedCart.subtotal, clonedCart.total);
-
-    await dispatch(
+    return dispatch(
       api.endpoints.updateCart.initiate({
+        ...clonedCart,
         cartId: clonedCart.id,
-        items: clonedCart.items,
-        subtotal: clonedCart.subtotal,
-        total: clonedCart.total,
-      }),
+      })
     );
   };
 
@@ -194,12 +160,10 @@ export const clearCart = (cart: Cart) => async (dispatch: AppDispatch) => {
     ? clonedCart.deliveryFee
     : DEFAULT_DELIVERY_FEE;
 
-  await dispatch(
+  return dispatch(
     api.endpoints.updateCart.initiate({
+      ...clonedCart,
       cartId: clonedCart.id,
-      items: clonedCart.items,
-      subtotal: clonedCart.subtotal,
-      total: clonedCart.total,
-    }),
+    })
   );
 };

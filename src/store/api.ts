@@ -52,11 +52,11 @@ export const api = createApi({
       providesTags: ["Cart"],
     }),
     updateCart: build.mutation<Cart, UpdateCartRequest>({
-      query: ({ cartId, items }) => {
+      query: ({ cartId, items, ...rest }) => {
         return {
           url: apiEndpoints.getCart(cartId),
           method: "PUT",
-          body: { items },
+          body: { ...rest, items },
         };
       },
       invalidatesTags: ["Cart"],
