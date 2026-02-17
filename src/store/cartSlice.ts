@@ -28,11 +28,12 @@ const initialState: CartState = {
 };
 
 export const calculateTotals = (items: CartItem[], deliveryFee: number) => {
+  const delivery = deliveryFee ? deliveryFee : DEFAULT_DELIVERY_FEE;
   const subtotal = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0,
   );
-  const total = subtotal + deliveryFee;
+  const total = subtotal + delivery;
   return { subtotal, total };
 };
 
@@ -146,6 +147,8 @@ export const incrementItem =
       api.endpoints.updateCart.initiate({
         cartId: clonedCart.id,
         items: clonedCart.items,
+        total: clonedCart.total,
+        subtotal: clonedCart.subtotal,
       }),
     );
   };
