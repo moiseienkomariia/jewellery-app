@@ -5,6 +5,8 @@ import { useCart } from "../../hooks/useCartActions";
 import { CartItemRow } from "./CartItemRow";
 import { incrementItem, decrementItem, clearCart } from "@store/cartSlice";
 import type { Cart, CartItem } from "@types";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../router";
 
 export const CartPage = () => {
   const { data: cart, isLoading } = useCart();
@@ -54,6 +56,8 @@ export const CartPage = () => {
         <span>{cart.total}</span>
       </div>
       <button onClick={() => handleClearCart(cart)}>Clear</button>
+      <hr />
+      <Link to={ROUTES.CHECKOUT}>Go To Checkout</Link>
     </>
   );
 };

@@ -58,3 +58,45 @@ export interface UpdateCartRequest extends Partial<Cart> {
   cartId: number;
   items: CartItem[];
 }
+
+export interface OrderItem {
+  productId: number;
+  name: string;
+  quantity: number;
+  price: number;
+}
+
+export interface DeliveryAddress {
+  fullName: string;
+  street: string;
+  city: string;
+  country: string;
+  postalCode: string;
+}
+
+export type PaymentType = "Visa" | "Mastercard" | "PayPal";
+
+export interface PaymentMethod {
+  method: PaymentType;
+  last4: string;
+}
+
+export type OrderStatus =
+  | "new"
+  | "paid"
+  | "shipped"
+  | "delivered"
+  | "cancelled";
+
+export interface Order {
+  id: number;
+  userId: number;
+  items: OrderItem[];
+  deliveryAddress: DeliveryAddress;
+  payment: PaymentMethod;
+  subtotal: number;
+  deliveryFee: number;
+  total: number;
+  status: OrderStatus;
+  createdAt: string;
+}
